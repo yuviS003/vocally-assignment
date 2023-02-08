@@ -6,7 +6,8 @@ const addBooks = async (req, res) => {
   console.log(req.body);
 
   const checkDuplicity = await Library.findOne({ bookName }).exec();
-  if (checkDuplicity) return res.status(409).send({ message: "Book Already Exists" });
+  if (checkDuplicity)
+    return res.status(409).send({ message: "Book Already Exists" });
 
   try {
     const createBook = await Library.create({
@@ -56,7 +57,9 @@ const deleteSingleBook = async (req, res) => {
 
   const result = await book.deleteOne({ _id: req.params.id });
 
-  res.status(200).json({ message: "Book delete successfully", deletedBookId: result._id });
+  res
+    .status(200)
+    .json({ message: "Book delete successfully", deletedBookId: result._id });
 };
 
 const deleteAllBooks = async (req, res) => {
@@ -68,7 +71,7 @@ const deleteAllBooks = async (req, res) => {
 
   const result = await Library.deleteMany({});
 
-  res.json({
+  res.status(200).json({
     message: "Book delete successfully",
     result,
   });
@@ -94,7 +97,7 @@ const updateBook = async (req, res) => {
   if (req.body?.isBookIssued) book.isBookIssued = req.body.isBookIssued;
 
   const result = await book.save();
-  res.json(result);
+  res.status(200).json(result);
 };
 
 const updateBookIssuedStatus = async (req, res) => {
@@ -114,7 +117,7 @@ const updateBookIssuedStatus = async (req, res) => {
   book.isBookIssued = req.body.isBookIssued;
 
   const result = await book.save();
-  res.json(result);
+  res.status(200).json(result);
 };
 
 module.exports = {

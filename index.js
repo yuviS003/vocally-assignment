@@ -36,13 +36,12 @@ const options = {
         "This is a simple Library management API made with Node JS and Express JS",
       contact: {
         name: "Yuvraj Singh",
-        url: "https://github.com/yuviS003",
         email: "yuvi7860808034@gmail.com",
       },
     },
     servers: [
       {
-        url: `http://localhost:5000`,
+        url: `http://localhost:3000`,
       },
     ],
   },
