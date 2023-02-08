@@ -158,7 +158,63 @@ router.delete("/deleteSingleBook/:id", deleteSingleBook);
  */
 router.delete("/deleteAllBooks", deleteAllBooks);
 
+/**
+ * @swagger
+ * /library/updateBook/{id}:
+ *  put:
+ *    summary: Update the book by the id
+ *    tags: [Library]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        schema:
+ *          type: string
+ *        required: true
+ *        description: The book id
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Library'
+ *    responses:
+ *      200:
+ *        description: The book was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Library'
+ *      204:
+ *        description: The book was not found
+ *      500:
+ *        description: Some error happened
+ */
 router.put("/updateBook/:id", updateBook);
+
+/**
+ * @swagger
+ * /library/updateBookIssuedStatus:
+ *  put:
+ *    summary: Update the book issue status
+ *    tags: [Library]
+ *    requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *          schema:
+ *            $ref: '#/components/schemas/Library'
+ *    responses:
+ *      200:
+ *        description: The book issue status was updated
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Library'
+ *      204:
+ *        description: The book was not found
+ *      500:
+ *        description: Some error happened
+ */
 router.put("/updateBookIssuedStatus/", updateBookIssuedStatus);
 
 module.exports = router;
