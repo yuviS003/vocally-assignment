@@ -6,7 +6,7 @@ const addBooks = async (req, res) => {
   console.log(req.body);
 
   const checkDuplicity = await Library.findOne({ bookName }).exec();
-  if (checkDuplicity) return res.send({ message: "Book Already Exists" });
+  if (checkDuplicity) return res.status(409).send({ message: "Book Already Exists" });
 
   try {
     const createBook = await Library.create({
@@ -16,7 +16,7 @@ const addBooks = async (req, res) => {
       bookPrice,
       isBookIssued,
     });
-    res.send({
+    res.status(200).send({
       message: "New Book Created",
       newBookID: createBook._id,
     });
@@ -27,23 +27,19 @@ const addBooks = async (req, res) => {
 const getAllBooks = async (req, res) => {
   const books = await Library.find();
   if (!books) return res.status(204).json({ message: "no books found" });
-  res.json(books);
+  res.status(200).json(books);
 };
 
 const getSingleBook = async (req, res) => {
   if (!req?.params?.id)
     return res.status(400).json({ message: `Book ID required` });
-  try {
-    const book = await Library.findOne({ _id: req.params.id }).exec();
-  } catch (err) {
-    console.log(err);
-  }
+  const book = await Library.findOne({ _id: req.params.id }).exec();
   if (!book) {
     return res
-      .status(204)
+      .status(404)
       .json({ message: `No book matches ID ${req.params.id}` });
   }
-  res.json(book);
+  res.status(200).json(book);
 };
 
 const deleteSingleBook = async (req, res) => {
@@ -60,7 +56,7 @@ const deleteSingleBook = async (req, res) => {
 
   const result = await book.deleteOne({ _id: req.params.id });
 
-  res.json({ message: "Book delete successfully", deletedBookId: result._id });
+  res.status(200).json({ message: "Book delete successfully", deletedBookId: result._id });
 };
 
 const deleteAllBooks = async (req, res) => {

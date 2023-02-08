@@ -31,7 +31,7 @@ const options = {
     openapi: "3.0.0",
     info: {
       title: "Vocally Library API docs",
-      version: "0.0.1",
+      version: "1.0.0",
       description:
         "This is a simple Library management API made with Node JS and Express JS",
       contact: {
