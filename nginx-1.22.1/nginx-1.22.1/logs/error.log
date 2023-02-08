@@ -1,0 +1,2 @@
+2023/02/08 13:47:08 [error] 15556#20128: *1 CreateFile() "C:\Users\Yuvraj\Desktop\nginx-1.22.1\nginx-1.22.1/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8000", referrer: "http://localhost:8000/"
+2023/02/08 13:49:38 [emerg] 20672#1396: unexpected "}" in C:\Users\Yuvraj\Desktop\nginx-1.22.1\nginx-1.22.1/conf/nginx.conf:47
