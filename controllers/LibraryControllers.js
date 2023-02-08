@@ -82,7 +82,7 @@ const updateBook = async (req, res) => {
   if (!req?.params?.id)
     return res
       .status(400)
-      .json({ message: `Book ID ${req.body.id} not found` });
+      .json({ message: `Book ID ${req.params.id} not found` });
 
   const book = await Library.findOne({ _id: req.params.id }).exec();
 
@@ -101,6 +101,26 @@ const updateBook = async (req, res) => {
   res.json(result);
 };
 
+const updateBookIssuedStatus = async (req, res) => {
+  if (!req?.body?.id)
+    return res
+      .status(400)
+      .json({ message: `Book ID ${req.body.id} not found` });
+
+  const book = await Library.findOne({ _id: req.body.id }).exec();
+
+  if (!book) {
+    return res
+      .status(204)
+      .json({ message: `No book matches ID ${req.body.id}` });
+  }
+
+  book.isBookIssued = req.body.isBookIssued;
+
+  const result = await book.save();
+  res.json(result);
+};
+
 module.exports = {
   addBooks,
   getAllBooks,
@@ -108,4 +128,5 @@ module.exports = {
   deleteSingleBook,
   deleteAllBooks,
   updateBook,
+  updateBookIssuedStatus,
 };

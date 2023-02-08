@@ -5,6 +5,7 @@ const {
   deleteSingleBook,
   deleteAllBooks,
   updateBook,
+  updateBookIssuedStatus,
 } = require("../controllers/LibraryControllers");
 const router = require("express").Router();
 
@@ -17,5 +18,6 @@ router.delete("/deleteSingleBook/:id", deleteSingleBook);
 router.delete("/deleteAllBooks", deleteAllBooks);
 
 router.put("/updateBook/:id", updateBook);
+router.put("/updateBookIssuedStatus/", updateBookIssuedStatus);
 
 module.exports = router;
